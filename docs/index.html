@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta
+    name="description"
+    content="PubPaper 控制领域投稿导航，集中展示 CCC、CAC、CPCC、L-CSS、TAC、TCST、CDC、CCTA 等会议与期刊的官网、征稿入口、截稿状态与模板。"
+  />
+  <title>PubPaper | 控制领域投稿导航</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=Noto+Sans+SC:wght@400;500;700;800&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="page-shell">
+    <header class="site-header">
+      <div class="container header-row">
+        <a class="brand" href="/PubPaper/">
+          <span class="brand-mark">P</span>
+          <span>PubPaper</span>
+        </a>
+        <nav class="nav">
+          <a href="#china">中文会议</a>
+          <a href="#ieee-conf">国际会议</a>
+          <a href="#journals">期刊</a>
+          <a href="#cbf">CBF 方向</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="container hero-grid">
+          <div class="hero-copy">
+            <p class="eyebrow">Control Submission Navigator</p>
+            <h1>控制领域投稿网址导航</h1>
+            <p class="hero-text">
+              面向控制理论、智能控制、安全控制与 CBF
+              相关研究，集中整理会议与期刊的官网、收稿入口、截稿状态和模板入口，适合日常检索与投前准备。
+            </p>
+            <div class="hero-actions">
+              <a class="button button-primary" href="#china">查看中文会议</a>
+              <a class="button button-secondary" href="#journals">查看期刊入口</a>
+            </div>
+            <div class="tag-row">
+              <span class="tag">CCC / CAC / CPCC</span>
+              <span class="tag">IEEE CSS</span>
+              <span class="tag">CBF / Safety-Critical Control</span>
+              <span class="tag">GitHub Pages /docs</span>
+            </div>
+          </div>
+
+          <aside class="hero-panel">
+            <div class="panel-card">
+              <p class="panel-title">页面说明</p>
+              <ul class="panel-list">
+                <li>优先放置官网与官方投稿入口。</li>
+                <li>截稿字段区分滚动投稿、待公布、已公布日期。</li>
+                <li>适合直接部署到 <code>https://qianyuan1437.github.io/PubPaper/</code>。</li>
+              </ul>
+            </div>
+            <div class="panel-card accent-card">
+              <p class="panel-title">维护建议</p>
+              <p>
+                当新一年度 CFP 发布后，只需修改对应卡片中的“截稿状态”与“征稿链接”即可，无需调整整体样式。
+              </p>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="container summary-strip">
+        <article class="summary-card">
+          <p class="summary-label">导航范围</p>
+          <p class="summary-value">中文控制会议 + IEEE 控制期刊/会议</p>
+        </article>
+        <article class="summary-card">
+          <p class="summary-label">重点方向</p>
+          <p class="summary-value">控制屏障函数、鲁棒控制、最优控制、安全控制</p>
+        </article>
+        <article class="summary-card">
+          <p class="summary-label">日期说明</p>
+          <p class="summary-value">滚动投稿 / 待公布 / 官方已公布</p>
+        </article>
+        <article class="summary-card">
+          <p class="summary-label">最后整理</p>
+          <p class="summary-value">2026-03-16</p>
+        </article>
+      </section>
+
+      <section class="container tools-strip" aria-labelledby="tools-title">
+        <div class="tools-card">
+          <div class="tools-heading">
+            <div>
+              <p class="section-kicker">Quick Finder</p>
+              <h2 id="tools-title">快速筛选</h2>
+            </div>
+            <p class="tools-tip">支持按名称、方向和投稿状态快速过滤当前页面中的会议与期刊卡片。</p>
+          </div>
+
+          <div class="filter-grid">
+            <label class="filter-field">
+              <span>关键词</span>
+              <input id="searchInput" type="search" placeholder="例如 CBF、IEEE、CCC、Automatica" />
+            </label>
+
+            <label class="filter-field">
+              <span>类型</span>
+              <select id="typeFilter">
+                <option value="all">全部</option>
+                <option value="conference">会议</option>
+                <option value="journal">期刊</option>
+              </select>
+            </label>
+
+            <label class="filter-field">
+              <span>投稿状态</span>
+              <select id="statusFilter">
+                <option value="all">全部</option>
+                <option value="open">滚动投稿</option>
+                <option value="rolling">关注年度 CFP</option>
+                <option value="waiting">待官网更新</option>
+              </select>
+            </label>
+
+            <label class="filter-field">
+              <span>研究方向</span>
+              <select id="topicFilter">
+                <option value="all">全部</option>
+                <option value="cbf">CBF / 安全控制</option>
+                <option value="theory">控制理论</option>
+                <option value="application">工程应用</option>
+                <option value="process">过程控制</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="chips-row">
+            <button class="chip is-active" type="button" data-chip-filter="all">全部</button>
+            <button class="chip" type="button" data-chip-filter="cbf">CBF</button>
+            <button class="chip" type="button" data-chip-filter="ieee">IEEE</button>
+            <button class="chip" type="button" data-chip-filter="journal">期刊</button>
+            <button class="chip" type="button" data-chip-filter="conference">会议</button>
+          </div>
+
+          <div class="view-switch" role="tablist" aria-label="视图切换">
+            <button class="view-button is-active" type="button" data-view="cards">卡片视图</button>
+            <button class="view-button" type="button" data-view="table">表格视图</button>
+          </div>
+
+          <p class="results-note">当前共收录 <strong id="resultCount">0</strong> 个条目。</p>
+        </div>
+      </section>
+
+      <section class="container table-view-section" id="tableViewSection" hidden>
+        <div class="section-heading">
+          <p class="section-kicker">Table Overview</p>
+          <h2>投稿信息总览表</h2>
+          <p>表格视图适合快速浏览所有条目、复制链接和纵向比较投稿状态。</p>
+        </div>
+        <div class="table-shell">
+          <table class="venues-table">
+            <thead>
+              <tr>
+                <th>名称</th>
+                <th>类型</th>
+                <th>状态</th>
+                <th>官网</th>
+                <th>收稿公告</th>
+                <th>截稿日期</th>
+                <th>模板</th>
+              </tr>
+            </thead>
+            <tbody id="venuesTableBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <div id="cardsView">
+      <section class="container section-block" id="china">
+        <div class="section-heading">
+          <p class="section-kicker">Chinese Conferences</p>
+          <h2>中国控制类会议</h2>
+          <p>优先收录你提到的 CPCC、CAC、CCC，并统一给出官网、征稿入口、截稿状态与模板入口。</p>
+        </div>
+
+        <div class="venue-grid">
+          <article class="venue-card" data-entry-type="conference" data-status="waiting" data-topics="theory application china" data-search="ccc 中国控制会议 conference on control">
+            <div class="venue-top">
+              <span class="pill">Conference</span>
+              <span class="status waiting">年度征稿待更新</span>
+            </div>
+            <h3>CCC · 中国控制会议</h3>
+            <p class="venue-desc">中国控制领域代表性会议，控制理论、系统分析、智能控制与应用方向覆盖广。</p>
+            <dl class="meta-list">
+              <div>
+                <dt>官网</dt>
+                <dd><a href="http://www.ccc.org.cn/" target="_blank" rel="noopener">www.ccc.org.cn</a></dd>
+              </div>
+              <div>
+                <dt>收稿公告</dt>
+                <dd><a href="http://www.ccc.org.cn/en/" target="_blank" rel="noopener">年度英文站 / 征稿入口</a></dd>
+              </div>
+              <div>
+                <dt>截稿日期</dt>
+                <dd>请以当年度官网 CFP 为准，当前页面保留为“待更新”。</dd>
+              </div>
+              <div>
+                <dt>投稿模板</dt>
+                <dd><a href="https://www.ieee.org/conferences/publishing/templates.html" target="_blank" rel="noopener">IEEE 官方模板</a></dd>
+              </div>
+            </dl>
+          </article>
+
+          <article class="venue-card" data-entry-type="conference" data-status="waiting" data-topics="theory application china automation" data-search="cac 中国自动化大会 automation control">
+            <div class="venue-top">
+              <span class="pill">Conference</span>
+              <span class="status waiting">年度征稿待更新</span>
+            </div>
+            <h3>CAC · 中国自动化大会</h3>
+            <p class="venue-desc">中国自动化与控制领域大型综合性会议，通常包含控制理论、系统工程、机器人与智能系统分会。</p>
+            <dl class="meta-list">
+              <div>
+                <dt>官网</dt>
+                <dd><a href="http://www.cac.org.cn/" target="_blank" rel="noopener">www.cac.org.cn</a></dd>
+              </div>
+              <div>
+                <dt>收稿公告</dt>
+                <dd><a href="http://www.cac.org.cn/" target="_blank" rel="noopener">大会主页 / Call for Papers</a></dd>
+              </div>
+              <div>
+                <dt>截稿日期</dt>
+                <dd>建议重点查看当年大会首页通知栏，当前页面先标记为“待官网公布”。</dd>
+              </div>
+              <div>
+                <dt>投稿模板</dt>
+                <dd><a href="https://www.ieee.org/conferences/publishing/templates.html" target="_blank" rel="noopener">IEEE 官方模板</a></dd>
+              </div>
+            </dl>
+          </article>
+
+          <article class="venue-card" data-entry-type="conference" data-status="waiting" data-topics="process application china" data-search="cpcc 中国过程控制会议 process control">
+            <div class="venue-top">
+              <span class="pill">Conference</span>
+              <span class="status waiting">年度征稿待更新</span>
+            </div>
+            <h3>CPCC · 中国过程控制会议</h3>
+            <p class="venue-desc">聚焦过程控制、工业智能、复杂系统控制与优化，是过程系统与控制方向的重要会议入口。</p>
+            <dl class="meta-list">
+              <div>
+                <dt>官网</dt>
+                <dd><a href="http://www.cpcc.org.cn/" target="_blank" rel="noopener">www.cpcc.org.cn</a></dd>
+              </div>
+              <div>
+                <dt>收稿公告</dt>
+                <dd><a href="http://www.cpcc.org.cn/" target="_blank" rel="noopener">大会主页 / 征稿更新</a></dd>
+              </div>
+              <div>
+                <dt>截稿日期</dt>
+                <dd>当前年度具体截稿日建议以上会官网最新通知为准。</dd>
+              </div>
+              <div>
+                <dt>投稿模板</dt>
+                <dd><a href="https://www.ieee.org/conferences/publishing/templates.html" target="_blank" rel="noopener">IEEE 官方模板</a></dd>
+              </div>
+            </dl>
+          </article>
+
+          <article class="venue-card" data-entry-type="conference" data-status="rolling" data-topics="theory application china asia" data-search="china control and decision conference ccdc 中国控制与决策会议">
+            <div class="venue-top">
+              <span class="pill">Conference</span>
+              <span class="status rolling">关注年度 CFP</span>
+            </div>
+            <h3>CCDC · 中国控制与决策会议</h3>
+            <p class="venue-desc">控制与决策领域的重要国内会议，适合算法、系统优化、智能控制与工程应用类工作交流。</p>
+            <dl class="meta-list">
+              <div>
+                <dt>官网</dt>
+                <dd><a href="https://www.ccdc.neu.edu.cn/" target="_blank" rel="noopener">CCDC 官方网站</a></dd>
+              </div>
+              <div>
+                <dt>收稿公告</dt>
+                <dd><a href="https://www.ccdc.neu.edu.cn/" target="_blank" rel="noopener">大会主页 / 征稿信息</a></dd>
+              </div>
+              <div>
+                <dt>截稿日期</dt>
+                <dd>以当年度 CCDC 官网公告为准。</dd>
+              </div>
+              <div>
+                <dt>投稿模板</dt>
+                <dd><a href="https://www.ieee.org/conferences/publishing/templates.html" target="_blank" rel="noopener">IEEE 官方模板</a></dd>
+              </div>
+            </dl>
+          </article>
+        </div>
+      </section>
+
+      <section class="container section-block" id="ieee-conf">
+        <div class="section-heading">
+          <p class="section-kicker">IEEE & International Conferences</p>
+          <h2>国际控制会议</h2>
+          <p>补充 IEEE Control Systems Society 常见投稿去向，便于和中文会议放在一起对比检索。</p>
+        </div>
+
+        <div class="venue-grid">
+          <article class="venue-card featured-card" data-entry-type="conference" data-status="rolling" data-topics="cbf theory application ieee" data-search="cdc ieee conference on decision and control barrier function safety critical">
+            <div class="venue-top">
+              <span class="pill">IEEE CSS</span>
+              <span class="status rolling">关注年度 CFP</span>
+            </div>
+            <h3>CDC · IEEE Conference on Decision and Control</h3>
+            <p class="venue-desc">控制理论旗舰会议之一，CBF、安全控制、最优控制、学习控制等方向投稿非常常见。</p>
+            <dl class="meta-list">
+              <div>
+                <dt>官网</dt>
+                <dd><a href="https://ieeecss.org/conference/cdc" target="_blank" rel="noopener">IEEE CSS CDC 页面</a></dd>
+              </div>
+              <div>
+                <dt>收稿公告</dt>
+                <dd><a href="https://cdc2025.ieeecss.org/" target="_blank" rel="noopener">最近一届大会站点</a></dd>
+              </div>
+              <div>
+                <dt>截稿日期</dt>
+                <dd>以最新年度官网为准，通常在春季开放与截止。</dd>
+              </div>
+              <div>
+                <dt>投稿模板</dt>
+                <dd><a href="https://www.ieee.org/conferences/publishing/templates.html" target="_blank" rel="noopener">IEEE 官方模板</a></dd>
+              </div>
+            </dl>
+          </article>
+
+          <article class="venue-card" data-entry-type="conference" data-status="rolling" data-topics="cbf application ieee" data-search="ccta ieee conference on control technology and applications safety robotics">
+            <div class="venue-top">
+              <span class="pill">IEEE CSS</span>
+              <span class="status rolling">关注年度 CFP</span>
+            </div>
+            <h3>CCTA · IEEE Conference on Control Technology and Applications</h3>
+            <p class="venue-desc">偏应用与系统实现，适合安全控制、机器人控制、无人系统和工业控制相关工作。</p>
+            <dl class="meta-list">
+              <div>
+                <dt>官网</dt>
+                <dd><a href="https://ieeecss.org/conference/ccta" target="_blank" rel="noopener">IEEE CSS CCTA 页面</a></dd>
+              </div>
+              <div>
+                <dt>收稿公告</dt>
+                <dd><a href="https://ccta2025.ieeecss.org/" target="_blank" rel="noopener">最近一届大会站点</a></dd>
+              </div>
+              <div>
+                <dt>截稿日期</dt>
+                <dd>通常按年度 CFP 更新，请在大会站点首页核对最终日期。</dd>
+              </div>
+              <div>
+                <dt>投稿模板</dt>
+                <dd><a href="https://www.ieee.org/conferences/publishing/templates.html" target="_blank" rel="noopener">IEEE 官方模板</a></dd>
+              </div>
+            </dl>
+          </article>
+
+          <article class="venue-card" data-entry-type="conference" data-status="rolling" data-topics="cbf application theory" data-search="acc american control conference safety constrained control">
+            <div class="venue-top">
+              <span class="pill">AACC</span>
+              <span class="status rolling">关注年度 CFP</span>
+            </div>
+            <h3>ACC · American Control Conference</h3>
+            <p class="venue-desc">北美控制领域重要会议，CBF 与安全约束控制相关论文也较常见，可作为 CDC 之外的重要补充。</p>
+            <dl class="meta-list">
+              <div>
+                <dt>官网</dt>
+                <dd><a href="https://acc2025.a2c2.org/" target="_blank" rel="noopener">ACC 大会站点</a></dd>
+              </div>
+              <div>
+                <dt>收稿公告</dt>
+                <dd><a href="https://a2c2.org/conferences/acc" target="_blank" rel="noopener">AACC ACC 页面</a></dd>
+              </div>
+              <div>
+                <dt>截稿日期</dt>
+                <dd>请以当年度 ACC 征稿页面为准。</dd>
+              </div>
+              <div>
+                <dt>投稿模板</dt>
+                <dd><a href="https://www.ieee.org/conferences/publishing/templates.html" target="_blank" rel="noopener">IEEE 官方模板</a></dd>
+              </div>
+            </dl>
+          </article>
+
+          <article class="venue-card" data-entry-type="conference" data-status="rolling" data-topics="theory application ifac" data-search="ifac world congress control systems process systems">
+            <div class="venue-top">
+              <span class="pill">IFAC</span>
+              <span class="status rolling">关注年度 CFP</span>
+            </div>
+            <h3>IFAC World Congress</h3>
+            <p class="venue-desc">国际自动控制联合会旗舰大会，控制理论、系统工程、过程控制和工业控制方向覆盖极广。</p>
+            <dl class="meta-list">
+              <div>
+                <dt>官网</dt>
+                <dd><a href="https://www.ifac-control.org/events/world-congress" target="_blank" rel="noopener">IFAC World Congress 页面</a></dd>
+              </div>
+              <div>
+                <dt>收稿公告</dt>
+                <dd><a href="https://www.ifac-control.org/events" target="_blank" rel="noopener">IFAC Events / CFP</a></dd>
+              </div>
+              <div>
+                <dt>截稿日期</dt>
+                <dd>请以上一年度或当年度大会页面公布的时间为准。</dd>
+              </div>
+              <div>
+                <dt>投稿模板</dt>
+                <dd><a href="https://www.ifac-control.org/conferences/authors-guide" target="_blank" rel="noopener">IFAC Authors' Guide</a></dd>
+              </div>
+            </dl>
+          </article>
+
+          <article class="venue-card" data-entry-type="conference" data-status="rolling" data-topics="theory application europe" data-search="ecc european control conference nonlinear control optimization">
+            <div class="venue-top">
+              <span class="pill">EUCA</span>
+              <span class="status rolling">关注年度 CFP</span>
+            </div>
+            <h3>ECC · European Control Conference</h3>
+            <p class="venue-desc">欧洲控制领域核心会议，系统理论、优化、网络控制与安全控制相关论文较多。</p>
+            <dl class="meta-list">
+              <div>
+                <dt>官网</dt>
+                <dd><a href="https://ecc25.euca-ecc.org/" target="_blank" rel="noopener">ECC 大会站点</a></dd>
+              </div>
+              <div>
+                <dt>收稿公告</dt>
+                <dd><a href="https://euca-ecc.org/ecc-conferences/" target="_blank" rel="noopener">EUCA ECC 页面</a></dd>
+              </div>
+              <div>
+                <dt>截稿日期</dt>
+                <dd>按年度 ECC 公告更新，建议直接看当届大会站点。</dd>
+              </div>
+              <div>
+                <dt>投稿模板</dt>
+                <dd><a href="https://ecc25.euca-ecc.org/authors/" target="_blank" rel="noopener">大会作者指南</a></dd>
+              </div>
+            </dl>
+          </article>
+
+          <article class="venue-card" data-entry-type="conference" data-status="rolling" data-topics="theory application asia" data-search="asian control conference ascc control theory robotics">
+            <div class="venue-top">
+              <span class="pill">ASCC</span>
+              <span class="status rolling">关注年度 CFP</span>
+            </div>
+            <h3>ASCC · Asian Control Conference</h3>
+            <p class="venue-desc">亚洲控制领域代表性会议，适合控制理论、机器人控制和系统工程类工作投稿与交流。</p>
+            <dl class="meta-list">
+              <div>
+                <dt>官网</dt>
+                <dd><a href="https://www.ascc2026.org/" target="_blank" rel="noopener">ASCC 大会站点</a></dd>
+              </div>
+              <div>
+                <dt>收稿公告</dt>
+                <dd><a href="https://www.ascc2026.org/" target="_blank" rel="noopener">大会主页 / Call for Papers</a></dd>
+              </div>
+              <div>
+                <dt>截稿日期</dt>
+                <dd>请以当届 ASCC 官方页面信息为准。</dd>
+              </div>
+              <div>
+                <dt>投稿模板</dt>
+                <dd><a href="https://www.ieee.org/conferences/publishing/templates.html" target="_blank" rel="noopener">IEEE 官方模板</a></dd>
+              </div>
+            </dl>
+          </article>
+        </div>
+      </section>
+
+      <section class="container section-block" id="journals">
+        <div class="section-heading">
+          <p class="section-kicker">Journals</p>
+          <h2>控制方向常用期刊</h2>
+          <p>对期刊卡片统一保留官网、投稿系统或作者入口、截稿方式与模板链接，方便快速判断是否适合当前论文。</p>
+        </div>
+
+        <div class="venue-grid">
+          <article class="venue-card featured-card" data-entry-type="journal" data-status="open" data-topics="cbf theory ieee" data-search="l-css ieee control systems letters barrier function safety control">
+            <div class="venue-top">
+              <span class="pill">IEEE Journal</span>
+              <span class="status open">滚动投稿</span>
+            </div>
+            <h3>L-CSS · IEEE Control Systems Letters</h3>
+            <p class="venue-desc">快速通信类期刊，非常适合控制理论新结果、CBF 方法改进、小而精的创新点投稿。</p>
+            <dl class="meta-list">
+              <div>
+                <dt>官网</dt>
+                <dd><a href="https://ieeecss.org/publication/ieee-control-systems-letters" target="_blank" rel="noopener">IEEE CSS L-CSS 页面</a></dd>
+              </div>
+              <div>
+                <dt>收稿公告</dt>
+                <dd><a href="https://css.paperplaza.net/journals/lcss/scripts/login.pl" target="_blank" rel="noopener">PaperPlaza 投稿入口</a></dd>
+              </div>
+              <div>
+                <dt>截稿日期</dt>
+                <dd>滚动投稿，无固定年度截稿日。</dd>
+              </div>
+              <div>
+                <dt>投稿模板</dt>
+                <dd><a href="https://www.ieee.org/conferences/publishing/templates.html" target="_blank" rel="noopener">IEEE 官方模板</a></dd>
+              </div>
+            </dl>
+          </article>
+
+          <article class="venue-card" data-entry-type="journal" data-status="open" data-topics="cbf theory ieee" data-search="tac ieee transactions on automatic control barrier function">
+            <div class="venue-top">
+              <span class="pill">IEEE Journal</span>
+              <span class="status open">滚动投稿</span>
+            </div>
+            <h3>TAC · IEEE Transactions on Automatic Control</h3>
+            <p class="venue-desc">控制理论顶级期刊，理论深度和证明完整度要求高，是 CBF 理论工作的重要目标期刊之一。</p>
+            <dl class="meta-list">
+              <div>
+                <dt>官网</dt>
+                <dd><a href="https://ieeecss.org/publication/ieee-transactions-automatic-control" target="_blank" rel="noopener">IEEE CSS TAC 页面</a></dd>
+              </div>
+              <div>
+                <dt>收稿公告</dt>
+                <dd><a href="https://css.paperplaza.net/journals/tac" target="_blank" rel="noopener">PaperPlaza 投稿入口</a></dd>
+              </div>
+              <div>
+                <dt>截稿日期</dt>
+                <dd>滚动投稿，无固定年度截稿日。</dd>
+              </div>
+              <div>
+                <dt>投稿模板</dt>
+                <dd><a href="https://www.ieee.org/conferences/publishing/templates.html" target="_blank" rel="noopener">IEEE 官方模板</a></dd>
+              </div>
+            </dl>
+          </article>
+
+          <article class="venue-card" data-entry-type="journal" data-status="open" data-topics="cbf application ieee" data-search="tcst ieee transactions on control systems technology robotics vehicles">
+            <div class="venue-top">
+              <span class="pill">IEEE Journal</span>
+              <span class="status open">滚动投稿</span>
+            </div>
+            <h3>TCST · IEEE Transactions on Control Systems Technology</h3>
+            <p class="venue-desc">更强调控制技术实现与工程验证，适合带有实验系统、机器人、车辆或工业过程验证的 CBF 论文。</p>
+            <dl class="meta-list">
+              <div>
+                <dt>官网</dt>
+                <dd><a href="https://ieeecss.org/publication/ieee-transactions-control-systems-technology" target="_blank" rel="noopener">IEEE CSS TCST 页面</a></dd>
+              </div>
+              <div>
+                <dt>收稿公告</dt>
+                <dd><a href="https://css.paperplaza.net/journals/tcst" target="_blank" rel="noopener">PaperPlaza 投稿入口</a></dd>
+              </div>
+              <div>
+                <dt>截稿日期</dt>
+                <dd>滚动投稿，无固定年度截稿日。</dd>
+              </div>
+              <div>
+                <dt>投稿模板</dt>
+                <dd><a href="https://www.ieee.org/conferences/publishing/templates.html" target="_blank" rel="noopener">IEEE 官方模板</a></dd>
+              </div>
+            </dl>
+          </article>
+
+          <article class="venue-card" data-entry-type="journal" data-status="open" data-topics="cbf theory application" data-search="automatica safety critical control barrier function nonlinear control">
+            <div class="venue-top">
+              <span class="pill">Elsevier</span>
+              <span class="status open">滚动投稿</span>
+            </div>
+            <h3>Automatica</h3>
+            <p class="venue-desc">国际控制领域核心期刊，理论、方法与应用覆盖全面，也是 CBF、安全控制和非线性控制的常见去向。</p>
+            <dl class="meta-list">
+              <div>
+                <dt>官网</dt>
+                <dd><a href="https://www.sciencedirect.com/journal/automatica" target="_blank" rel="noopener">ScienceDirect Automatica</a></dd>
+              </div>
+              <div>
+                <dt>收稿公告</dt>
+                <dd><a href="https://www.editorialmanager.com/automatica/" target="_blank" rel="noopener">Editorial Manager 投稿入口</a></dd>
+              </div>
+              <div>
+                <dt>截稿日期</dt>
+                <dd>滚动投稿，无固定年度截稿日。</dd>
+              </div>
+              <div>
+                <dt>投稿模板</dt>
+                <dd><a href="https://www.elsevier.com/authors/policies-and-guidelines/latex-instructions" target="_blank" rel="noopener">Elsevier LaTeX 指南</a></dd>
+              </div>
+            </dl>
+          </article>
+
+          <article class="venue-card" data-entry-type="journal" data-status="open" data-topics="application process" data-search="control engineering practice industrial process control implementation">
+            <div class="venue-top">
+              <span class="pill">Elsevier</span>
+              <span class="status open">滚动投稿</span>
+            </div>
+            <h3>Control Engineering Practice</h3>
+            <p class="venue-desc">偏重控制工程落地和系统实现，适合过程控制、工业控制与算法部署类论文。</p>
+            <dl class="meta-list">
+              <div>
+                <dt>官网</dt>
+                <dd><a href="https://www.sciencedirect.com/journal/control-engineering-practice" target="_blank" rel="noopener">ScienceDirect CEP</a></dd>
+              </div>
+              <div>
+                <dt>收稿公告</dt>
+                <dd><a href="https://www.editorialmanager.com/conengprac/" target="_blank" rel="noopener">Editorial Manager 投稿入口</a></dd>
+              </div>
+              <div>
+                <dt>截稿日期</dt>
+                <dd>滚动投稿，无固定年度截稿日。</dd>
+              </div>
+              <div>
+                <dt>投稿模板</dt>
+                <dd><a href="https://www.elsevier.com/authors/policies-and-guidelines/latex-instructions" target="_blank" rel="noopener">Elsevier LaTeX 指南</a></dd>
+              </div>
+            </dl>
+          </article>
+
+          <article class="venue-card" data-entry-type="journal" data-status="open" data-topics="cbf theory application" data-search="international journal of robust and nonlinear control robust nonlinear safety control">
+            <div class="venue-top">
+              <span class="pill">Wiley</span>
+              <span class="status open">滚动投稿</span>
+            </div>
+            <h3>IJRNC · International Journal of Robust and Nonlinear Control</h3>
+            <p class="venue-desc">鲁棒控制、非线性控制与安全控制方向常见期刊，适合带理论与仿真验证的工作。</p>
+            <dl class="meta-list">
+              <div>
+                <dt>官网</dt>
+                <dd><a href="https://onlinelibrary.wiley.com/journal/10991239" target="_blank" rel="noopener">Wiley IJRNC</a></dd>
+              </div>
+              <div>
+                <dt>收稿公告</dt>
+                <dd><a href="https://wiley.atyponrex.com/journal/IJRNC" target="_blank" rel="noopener">作者与投稿入口</a></dd>
+              </div>
+              <div>
+                <dt>截稿日期</dt>
+                <dd>滚动投稿，无固定年度截稿日。</dd>
+              </div>
+              <div>
+                <dt>投稿模板</dt>
+                <dd><a href="https://authorservices.wiley.com/author-resources/Journal-Authors/Prepare/wiley-latex-template.html" target="_blank" rel="noopener">Wiley LaTeX 模板</a></dd>
+              </div>
+            </dl>
+          </article>
+
+          <article class="venue-card" data-entry-type="journal" data-status="open" data-topics="theory application letters" data-search="systems and control letters system theory control letters">
+            <div class="venue-top">
+              <span class="pill">Elsevier</span>
+              <span class="status open">滚动投稿</span>
+            </div>
+            <h3>Systems &amp; Control Letters</h3>
+            <p class="venue-desc">控制与系统理论短文期刊，适合中短篇理论结果、证明型工作和紧凑的新方法。</p>
+            <dl class="meta-list">
+              <div>
+                <dt>官网</dt>
+                <dd><a href="https://www.sciencedirect.com/journal/systems-and-control-letters" target="_blank" rel="noopener">ScienceDirect SCL</a></dd>
+              </div>
+              <div>
+                <dt>收稿公告</dt>
+                <dd><a href="https://www.editorialmanager.com/sysconle/" target="_blank" rel="noopener">Editorial Manager 投稿入口</a></dd>
+              </div>
+              <div>
+                <dt>截稿日期</dt>
+                <dd>滚动投稿，无固定年度截稿日。</dd>
+              </div>
+              <div>
+                <dt>投稿模板</dt>
+                <dd><a href="https://www.elsevier.com/authors/policies-and-guidelines/latex-instructions" target="_blank" rel="noopener">Elsevier LaTeX 指南</a></dd>
+              </div>
+            </dl>
+          </article>
+
+          <article class="venue-card" data-entry-type="journal" data-status="open" data-topics="cbf theory hybrid systems" data-search="nonlinear analysis hybrid systems safety critical hybrid control">
+            <div class="venue-top">
+              <span class="pill">Elsevier</span>
+              <span class="status open">滚动投稿</span>
+            </div>
+            <h3>Nonlinear Analysis: Hybrid Systems</h3>
+            <p class="venue-desc">适合混杂系统、安全约束控制、切换系统和 CBF / CLF 混合机制相关工作。</p>
+            <dl class="meta-list">
+              <div>
+                <dt>官网</dt>
+                <dd><a href="https://www.sciencedirect.com/journal/nonlinear-analysis-hybrid-systems" target="_blank" rel="noopener">ScienceDirect NAHS</a></dd>
+              </div>
+              <div>
+                <dt>收稿公告</dt>
+                <dd><a href="https://www.editorialmanager.com/nahs/" target="_blank" rel="noopener">Editorial Manager 投稿入口</a></dd>
+              </div>
+              <div>
+                <dt>截稿日期</dt>
+                <dd>滚动投稿，无固定年度截稿日。</dd>
+              </div>
+              <div>
+                <dt>投稿模板</dt>
+                <dd><a href="https://www.elsevier.com/authors/policies-and-guidelines/latex-instructions" target="_blank" rel="noopener">Elsevier LaTeX 指南</a></dd>
+              </div>
+            </dl>
+          </article>
+
+          <article class="venue-card" data-entry-type="journal" data-status="open" data-topics="application review" data-search="annual reviews in control survey overview control engineering">
+            <div class="venue-top">
+              <span class="pill">Elsevier</span>
+              <span class="status open">滚动投稿</span>
+            </div>
+            <h3>Annual Reviews in Control</h3>
+            <p class="venue-desc">适合较系统的综述与专题回顾，若你后续准备写 CBF 方向 survey，可作为备选参考入口。</p>
+            <dl class="meta-list">
+              <div>
+                <dt>官网</dt>
+                <dd><a href="https://www.sciencedirect.com/journal/annual-reviews-in-control" target="_blank" rel="noopener">ScienceDirect Annual Reviews in Control</a></dd>
+              </div>
+              <div>
+                <dt>收稿公告</dt>
+                <dd><a href="https://www.editorialmanager.com/aric/" target="_blank" rel="noopener">Editorial Manager 投稿入口</a></dd>
+              </div>
+              <div>
+                <dt>截稿日期</dt>
+                <dd>滚动投稿，专题文章请注意特刊通知。</dd>
+              </div>
+              <div>
+                <dt>投稿模板</dt>
+                <dd><a href="https://www.elsevier.com/authors/policies-and-guidelines/latex-instructions" target="_blank" rel="noopener">Elsevier LaTeX 指南</a></dd>
+              </div>
+            </dl>
+          </article>
+
+          <article class="venue-card" data-entry-type="journal" data-status="open" data-topics="china theory application" data-search="控制理论与应用 control theory applications 中文期刊">
+            <div class="venue-top">
+              <span class="pill">中文期刊</span>
+              <span class="status open">滚动投稿</span>
+            </div>
+            <h3>《控制理论与应用》</h3>
+            <p class="venue-desc">国内控制领域代表性中文期刊之一，适合控制理论、系统建模、智能控制与应用研究。</p>
+            <dl class="meta-list">
+              <div>
+                <dt>官网</dt>
+                <dd><a href="https://jcta.alljournals.ac.cn/cta_cn/ch/index.aspx" target="_blank" rel="noopener">期刊官网</a></dd>
+              </div>
+              <div>
+                <dt>收稿公告</dt>
+                <dd><a href="https://jcta.alljournals.ac.cn/cta_cn/ch/index.aspx" target="_blank" rel="noopener">官网 / 投稿入口</a></dd>
+              </div>
+              <div>
+                <dt>截稿日期</dt>
+                <dd>常规栏目通常为滚动投稿，特刊以单独通知为准。</dd>
+              </div>
+              <div>
+                <dt>投稿模板</dt>
+                <dd><a href="https://jcta.alljournals.ac.cn/cta_cn/ch/index.aspx" target="_blank" rel="noopener">官网作者指南</a></dd>
+              </div>
+            </dl>
+          </article>
+
+          <article class="venue-card" data-entry-type="journal" data-status="open" data-topics="china application process" data-search="控制工程 control engineering 中文期刊 工业控制">
+            <div class="venue-top">
+              <span class="pill">中文期刊</span>
+              <span class="status open">滚动投稿</span>
+            </div>
+            <h3>《控制工程》</h3>
+            <p class="venue-desc">偏重工程应用、过程控制与系统实现，适合工业控制、优化调度和算法落地类论文。</p>
+            <dl class="meta-list">
+              <div>
+                <dt>官网</dt>
+                <dd><a href="https://kzygc.cbpt.cnki.net/WKD/WebPublication/index.aspx?mid=kzyg" target="_blank" rel="noopener">期刊官网</a></dd>
+              </div>
+              <div>
+                <dt>收稿公告</dt>
+                <dd><a href="https://kzygc.cbpt.cnki.net/WKD/WebPublication/index.aspx?mid=kzyg" target="_blank" rel="noopener">官网 / 投稿信息</a></dd>
+              </div>
+              <div>
+                <dt>截稿日期</dt>
+                <dd>通常为滚动投稿，专题征稿以官网通知为准。</dd>
+              </div>
+              <div>
+                <dt>投稿模板</dt>
+                <dd><a href="https://kzygc.cbpt.cnki.net/WKD/WebPublication/index.aspx?mid=kzyg" target="_blank" rel="noopener">官网作者指南</a></dd>
+              </div>
+            </dl>
+          </article>
+        </div>
+
+        <p id="noResults" class="empty-state" hidden>当前筛选条件下没有匹配条目，可以清空关键词或切回“全部”。</p>
+      </section>
+
+      <section class="container section-block cbf-block" id="cbf">
+        <div class="section-heading">
+          <p class="section-kicker">CBF Focus</p>
+          <h2>CBF / 安全控制方向推荐去向</h2>
+          <p>如果你的工作核心围绕 Control Barrier Function、安全约束、可达性、安全滤波或安全强化学习，可优先考虑以下组合。</p>
+        </div>
+
+        <div class="cbf-grid">
+          <article class="focus-card">
+            <h3>理论导向</h3>
+            <p>TAC、L-CSS、CDC 适合偏理论证明、稳定性分析、可行性条件与泛化型 CBF 结果。</p>
+          </article>
+          <article class="focus-card">
+            <h3>工程导向</h3>
+            <p>TCST、CCTA、ACC 更适合带有机器人、车辆、无人机、工业系统实验验证的工作。</p>
+          </article>
+          <article class="focus-card">
+            <h3>中文传播</h3>
+            <p>CCC、CAC、CPCC 适合先做国内交流、积累反馈，再面向国际期刊或国际会议扩展投稿。</p>
+          </article>
+        </div>
+      </section>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-row">
+        <div>
+          <p class="footer-title">PubPaper</p>
+          <p>控制领域投稿与网址导航页，适配 GitHub Pages `/docs` 发布。</p>
+        </div>
+        <div>
+          <p class="footer-title">发布地址</p>
+          <p><a href="https://qianyuan1437.github.io/PubPaper/" target="_blank" rel="noopener">qianyuan1437.github.io/PubPaper</a></p>
+        </div>
+        <div>
+          <p class="footer-title">维护提示</p>
+          <p>建议每年 CFP 发布后更新一次“收稿公告”和“截稿日期”字段。</p>
+        </div>
+      </div>
+    </footer>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
